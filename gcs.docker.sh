@@ -21,6 +21,8 @@ set +e
 sudo groupadd docker || echo "Skipping 'sudo groupadd docker' as it already exists"
 set -e
 sudo usermod -aG docker $USER
+# Trying to reload group. Might not work actually
+exec newgrp docker
 
 
 # Login to docker
