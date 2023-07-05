@@ -9,7 +9,7 @@ if [ -f "$f_docker_keyring" ]; then
 	sudo rm -f "$f_docker_keyring"
 fi
 
-distro=echo $(grep -oP '(?<=^ID=).+' /etc/os-release | tr -d '"')
+distro=$(grep -oP '(?<=^ID=).+' /etc/os-release | tr -d '"')
 curl -fsSL "https://download.docker.com/linux/$distro/gpg" | sudo gpg --dearmor -o "$f_docker_keyring"
 echo "deb [arch=$(dpkg --print-architecture) signed-by=$f_docker_keyring] https://download.docker.com/linux/$distro $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
